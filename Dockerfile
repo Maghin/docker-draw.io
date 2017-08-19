@@ -28,33 +28,10 @@ RUN set -xe; \
   && ant war \
   && cd ${CATALINA_HOME} \
   \
-  && cp -rp /tmp/drawio-${VERSION}/build/draw.war ${CATALINA_HOME}/webapps/ \
+  && rm -rf ${CATALINA_HOME}/webapps/*
+  && cp -rp /tmp/drawio-${VERSION}/build/draw.war ${CATALINA_HOME}/webapps/ROOT.war \
   && rm -rf /tmp/drawio-${VERSION} \
   && rm -rf /tmp/v${VERSION}.zip \
   \
   && apt-get autoremove -y ${buildDeps} \
   && rm -rf /var/lib/apt/lists/*
-
-#=== Update server.xml to set 'draw' webapp to root ===
-RUN set -xe; \
-  \
-  buildDeps=' \
-    xmlstarlet \
-  ' \
-  && apt-get update && apt-get install -y --no-install-recommends ${buildDeps} \
-  \
-  && xmlstarlet ed \
-    -P -S -L \
-    -i '/Server/Service/Engine/Host/Valve' -t 'elem' -n 'Context' \
-    -i '/Server/Service/Engine/Host/Context' -t 'attr' -n 'path' -v '/' \
-    -i '/Server/Service/Engine/Host/Context[@path="/"]' -t 'attr' -n 'docBase' -v 'draw' \
-    -s '/Server/Service/Engine/Host/Context[@path="/"]' -t 'elem' -n 'WatchedResource' -v 'WEB-INF/web.xml' \
-    -i '/Server/Service/Engine/Host/Valve' -t 'elem' -n 'Context' \
-    -i '/Server/Service/Engine/Host/Context[not(@path="/")]' -t 'attr' -n 'path' -v '/ROOT' \
-    -s '/Server/Service/Engine/Host/Context[@path="/ROOT"]' -t 'attr' -n 'docBase' -v 'ROOT' \
-    -s '/Server/Service/Engine/Host/Context[@path="/ROOT"]' -t 'elem' -n 'WatchedResource' -v 'WEB-INF/web.xml' \
-  ${CATALINA_HOME}/conf/server.xml \
-  \
-  && apt-get autoremove -y ${buildDeps} \
-  && rm -rf /var/lib/apt/lists/*
-
