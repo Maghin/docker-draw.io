@@ -28,7 +28,7 @@ RUN set -xe; \
   && ant war \
   && cd ${CATALINA_HOME} \
   \
-  && rm -rf ${CATALINA_HOME}/webapps/*
+  && rm -rf ${CATALINA_HOME}/webapps/* \
   && cp -rp /tmp/drawio-${VERSION}/build/draw.war ${CATALINA_HOME}/webapps/ROOT.war \
   && rm -rf /tmp/drawio-${VERSION} \
   && rm -rf /tmp/v${VERSION}.zip \
