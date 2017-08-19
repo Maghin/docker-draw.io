@@ -1,4 +1,4 @@
-FROM tomcat:8-jre8
+FROM tomcat:8-jre8-alpine
 
 MAINTAINER MerhylStudio
 
@@ -7,11 +7,11 @@ ENV VERSION=7.1.0
 #=== Download source code, patch and build war ===
 RUN set -xe; \
   \
-  buildDeps=' \
-    ant \
-    openjdk-8-jdk \
-  ' \
-  && apt-get update && apt-get install -y --no-install-recommends ${buildDeps} \
+  apk add --no-cache --virtual .build-deps \
+    apache-ant \
+    "openjdk${JAVA_VERSION%%[-~bu]*}"="$JAVA_ALPINE_VERSION" \
+    unzip \
+    openssl \
   \
   && wget -q -P /tmp/ https://github.com/jgraph/draw.io/archive/v${VERSION}.zip \
   && unzip /tmp/v${VERSION}.zip -d /tmp \
@@ -33,5 +33,9 @@ RUN set -xe; \
   && rm -rf /tmp/drawio-${VERSION} \
   && rm -rf /tmp/v${VERSION}.zip \
   \
+<<<<<<< HEAD
   && apt-get autoremove -y ${buildDeps} \
   && rm -rf /var/lib/apt/lists/*
+=======
+  && apk del .build-deps
+>>>>>>> alpine
