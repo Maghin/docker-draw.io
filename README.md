@@ -11,7 +11,8 @@ draw.io (formerly Diagramly) is free online diagram software. You can use it as 
 docker run --rm -p 8080:8080 merhylstudio/draw.io
 ```
 
-Start a web browser session to http://*ip*:8080/?offline=1
+Start a web browser session to http://*ip*:8080/?offline=1&https=0
 
 > :memo: **Note:**
-> `?offline=1` is a security feature that disables support of cloud storage.
+> - `offline=1` is a security feature that disables support of cloud storage.
+> - `https=0` disable automatic usage of SSL
