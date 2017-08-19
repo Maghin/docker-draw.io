@@ -33,9 +33,4 @@ RUN set -xe; \
   && rm -rf /tmp/drawio-${VERSION} \
   && rm -rf /tmp/v${VERSION}.zip \
   \
-<<<<<<< HEAD
-  && apt-get autoremove -y ${buildDeps} \
-  && rm -rf /var/lib/apt/lists/*
-=======
   && apk del .build-deps
->>>>>>> alpine

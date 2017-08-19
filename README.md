@@ -1,11 +1,7 @@
 # Draw.io container
 
 [![Docker Build Status](https://img.shields.io/docker/build/merhylstudio/draw.io.svg)](https://hub.docker.com/r/merhylstudio/draw.io/)
-<<<<<<< HEAD
-[![Size](https://shields.beevelop.com/docker/image/image-size/merhylstudio/draw.io/latest.svg)](https://hub.docker.com/r/merhylstudio/draw.io/)
-=======
 [![Size](https://shields.beevelop.com/docker/image/image-size/merhylstudio/draw.io/alpine.svg)](https://hub.docker.com/r/merhylstudio/draw.io/)
->>>>>>> alpine
 
 draw.io (formerly Diagramly) is free online diagram software. You can use it as a flowchart maker, network diagram software, to create UML online, as an ER diagram tool, to design database schema, to build BPMN online, as a circuit diagram maker, and more. draw.io can import .vsdx, Gliffy™ and Lucidchart™ files .
 
